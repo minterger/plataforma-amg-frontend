@@ -6,7 +6,7 @@ const menuUser = ref(false);
 
 <template>
   <div
-    class="border-b shadow-sm w-full h-16 flex items-center gap-4 absolute px-8"
+    class="bg-white border-b shadow-sm w-full h-16 flex items-center gap-4 absolute px-8"
   >
     <div class="flex items-center gap-2 w-full">
       <label for="search"

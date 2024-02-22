@@ -7,7 +7,7 @@ const menuMobile = ref(false);
 <template>
   <div
     :class="menuMobile ? 'translate-x-0' : '-translate-x-full'"
-    class="fixed z-50 lg:static bg-gray-900 h-screen w-4/5 sm:w-96 p-4 lg:translate-x-0 transition-transform ease-in-out"
+    class="fixed z-50 lg:static bg-gray-900 h-screen w-4/5 sm:w-96 sm:min-w-60 p-4 lg:translate-x-0 transition-transform ease-in-out"
   >
     <button
       @click="

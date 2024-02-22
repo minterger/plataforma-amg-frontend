@@ -8,7 +8,9 @@ import TopNav from "./components/TopNav.vue";
     <Nav />
     <div class="w-full h-screen relative">
       <TopNav />
-      <div class="w-full h-full p-8 pt-24"><router-view></router-view></div>
+      <div class="w-full h-full p-8 pt-24 overflow-y-auto">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
