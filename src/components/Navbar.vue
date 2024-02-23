@@ -1,13 +1,23 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const menuMobile = ref(false);
+
+watch(
+  () => route.path,
+  () => {
+    menuMobile.value = false;
+  }
+);
 </script>
 
 <template>
   <div
     :class="menuMobile ? 'translate-x-0' : '-translate-x-full'"
-    class="fixed z-50 lg:static bg-gray-900 h-screen w-4/5 sm:w-96 sm:min-w-60 p-4 lg:translate-x-0 transition-transform ease-in-out"
+    class="fixed z-50 lg:static bg-gray-900 h-screen w-4/5 sm:w-80 lg:w-1/5 2xl:w-96 p-4 lg:translate-x-0 transition-transform ease-in-out"
   >
     <button
       @click="
@@ -15,7 +25,7 @@ const menuMobile = ref(false);
           menuMobile = !menuMobile;
         }
       "
-      class="absolute lg:hidden top-20 -right-12 bg-gray-900 py-2 pr-3 pl-2 rounded-r-full flex justify-end"
+      class="absolute lg:hidden top-20 -right-12 bg-gray-900 w-12 h-12 rounded-r-full flex pl-1 items-center"
     >
       <i
         :class="menuMobile ? 'bx-x' : 'bx-menu'"
@@ -33,21 +43,24 @@ const menuMobile = ref(false);
       <li>
         <router-link
           class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors"
-          to=""
+          to="/"
+          active-class="bg-gray-800 text-white"
           ><i class="bx bx-home text-2xl font-light"></i>Inicio</router-link
         >
       </li>
       <li>
         <router-link
           class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors"
-          to=""
+          to="/viajes"
+          active-class="bg-gray-800 text-white"
           ><i class="bx bxs-truck text-2xl font-light"></i>Viajes</router-link
         >
       </li>
       <li>
         <router-link
           class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors"
-          to=""
+          to="/jkhdiasbdiuasbdi"
+          active-class="bg-gray-800 text-white"
           ><i class="bx bx-hard-hat text-2xl font-light"></i
           >Fleteros</router-link
         >
@@ -55,7 +68,8 @@ const menuMobile = ref(false);
       <li>
         <router-link
           class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors"
-          to=""
+          to="/asdadasd"
+          active-class="bg-gray-800 text-white"
           ><i class="bx bx-transfer text-2xl font-light"></i
           >Transportes</router-link
         >
@@ -63,7 +77,8 @@ const menuMobile = ref(false);
       <li>
         <router-link
           class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors"
-          to=""
+          to="/asdasda"
+          active-class="bg-gray-800 text-white"
           ><i class="bx bx-hard-hat text-2xl font-light"></i
           >Transportes</router-link
         >
@@ -71,7 +86,8 @@ const menuMobile = ref(false);
       <li>
         <router-link
           class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors"
-          to=""
+          to="/asd"
+          active-class="bg-gray-800 text-white"
           ><i class="bx bx-hard-hat text-2xl font-light"></i
           >Transportes</router-link
         >
