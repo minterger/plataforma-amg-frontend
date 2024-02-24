@@ -10,7 +10,7 @@ const routerPush = (id) => {
 
 <template>
   <div
-    class="overflow-x-scroll w-full max-w-full border border-dashed p-4 rounded-lg shadow-md bg-white"
+    class="overflow-x-auto w-full max-w-full border border-dashed p-4 rounded-lg shadow-md bg-white"
   >
     <table
       class="my-0 w-full max-w-full align-middle text-dark border-neutral-200"
