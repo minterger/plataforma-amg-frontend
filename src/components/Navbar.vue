@@ -24,7 +24,14 @@ const emit = defineEmits(["toggleNav"]);
       @click="emit('toggleNav', !menu)"
       class="absolute top-20 -right-12 2xl:hidden bg-gray-900 w-12 h-12 rounded-r-full flex pl-1 items-center"
     >
-      <i :class="menu ? 'bx-x' : 'bx-menu'" class="bx text-white text-3xl"></i>
+      <i
+        :class="menu ? 'bx-x' : 'bx-menu'"
+        class="lg:hidden bx text-white text-3xl"
+      ></i>
+      <i
+        :class="menu ? 'rotate-0' : 'rotate-180'"
+        class="hidden bx-chevrons-left lg:block bx text-white text-3xl transition-transform"
+      ></i>
     </button>
 
     <div class="h-[23.7px]">
