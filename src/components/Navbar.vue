@@ -35,7 +35,11 @@ const emit = defineEmits(["toggleNav"]);
     </button>
 
     <div class="h-[23.7px]">
-      <img src="../assets/logoAMG.png" class="w-40 mt-4 w mx-auto" alt="" />
+      <img
+        src="../assets/logoAMG.png"
+        class="w-40 mt-4 w mx-auto logo"
+        alt=""
+      />
     </div>
 
     <ul class="text-slate-400 font-semibold mt-8 flex flex-col gap-1">
@@ -94,3 +98,9 @@ const emit = defineEmits(["toggleNav"]);
     </ul>
   </div>
 </template>
+
+<style scoped>
+.logo {
+  filter: saturate(0) brightness(4.6) contrast(0.9);
+}
+</style>
