@@ -2,6 +2,10 @@
 import { ref } from "vue";
 import Navbar from "./components/Navbar.vue";
 import TopNav from "./components/TopNav.vue";
+import Login from "./components/Login.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const navMenu = ref(false);
 
@@ -12,11 +16,14 @@ const toggleNav = (value) => {
 </script>
 
 <template>
-  <div class="w-screen max-w-full h-screen max-h-screen overflow-hidden flex">
+  <div
+    v-if="user.userToken"
+    class="w-full max-w-full h-screen max-h-screen overflow-hidden flex"
+  >
     <Navbar :menu="navMenu" @toggleNav="toggleNav" />
     <div
-      :class="navMenu ? 'lg:w-4/5' : 'lg:w-full'"
-      class="w-full h-screen 2xl:w-full relative transition-all"
+      :class="{ 'lg:w-4/5': navMenu }"
+      class="w-full h-screen 2xl:w-screen relative transition-all"
     >
       <TopNav />
       <div
@@ -26,4 +33,5 @@ const toggleNav = (value) => {
       </div>
     </div>
   </div>
+  <Login v-else />
 </template>

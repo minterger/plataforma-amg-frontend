@@ -10,12 +10,10 @@ const routerPush = (id) => {
 
 <template>
   <div
-    class="overflow-x-auto w-full max-w-full border border-dashed p-4 rounded-lg shadow-md bg-white"
+    class="overflow-x-auto w-full border border-dashed p-4 rounded-lg shadow-md bg-white"
   >
-    <table
-      class="my-0 w-full max-w-full align-middle text-dark border-neutral-200"
-    >
-      <thead class="max-w-full">
+    <table class="my-0 w-full align-middle text-dark border-neutral-200">
+      <thead class="w-full">
         <tr class="font-semibold text-[0.95rem] text-slate-500">
           <th class="pb-3 text-start">N° Contrato</th>
           <th class="pb-3 text-start">Fletero</th>
@@ -26,7 +24,7 @@ const routerPush = (id) => {
           <th class="pb-3 text-start">Estado</th>
         </tr>
       </thead>
-      <tbody class="text-slate-800 max-w-full">
+      <tbody class="text-slate-800 w-full">
         <tr
           v-for="i in 10"
           class="border-b border-dashed last:border-b-0"
