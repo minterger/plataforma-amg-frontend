@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from "vue";
+import { userStore } from "../stores/user.store";
+
+const user = userStore();
 
 const menuUser = ref(false);
 </script>
@@ -28,18 +31,23 @@ const menuUser = ref(false);
         "
         class="font-semibold flex items-center gap-2 whitespace-nowrap"
       >
-        Oscar Leonel Menci<i
-          class="bx bx-chevron-down text-slate-400 text-2xl"
-        ></i>
+        {{ user.user.name
+        }}<i class="bx bx-chevron-down text-slate-400 text-2xl"></i>
       </button>
       <ul
         :class="
           menuUser ? 'visible opacity-100' : 'invisible opacity-0 -scale-50'
         "
-        class="absolute right-0 rounded-md bg-white shadow-lg px-4 py-2 mt-2 w-32 flex flex-col gap-2 border transition-all"
+        class="absolute right-0 rounded-md bg-white shadow-lg mt-2 w-32 flex flex-col py-1 border transition-all"
       >
-        <li><router-link to="/">Tus Datos</router-link></li>
-        <li><button>Salir</button></li>
+        <li class="flex">
+          <router-link class="w-full px-2 py-1" to="/">Tus Datos</router-link>
+        </li>
+        <li class="flex">
+          <button class="w-full text-left px-2 py-1" @click="user.cerrarSesion">
+            Salir
+          </button>
+        </li>
       </ul>
     </div>
   </div>

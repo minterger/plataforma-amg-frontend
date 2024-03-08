@@ -1,11 +1,16 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Navbar from "./components/Navbar.vue";
 import TopNav from "./components/TopNav.vue";
-import Login from "./components/Login.vue";
-import { useRouter } from "vue-router";
+import { userStore } from "./stores/user.store";
+import { useRoute } from "vue-router";
 
-const router = useRouter();
+const user = userStore();
+const route = useRoute();
+
+user.getTokenLocalStorage();
+
+const isLogin = computed(() => route.name === "Login");
 
 const navMenu = ref(false);
 
@@ -16,6 +21,7 @@ const toggleNav = (value) => {
 </script>
 
 <template>
+  <router-view v-if="isLogin"></router-view>
   <div
     v-if="user.userToken"
     class="w-full max-w-full h-screen max-h-screen overflow-hidden flex"
@@ -33,5 +39,4 @@ const toggleNav = (value) => {
       </div>
     </div>
   </div>
-  <Login v-else />
 </template>

@@ -1,8 +1,8 @@
 <script setup>
-import { ref, watch } from "vue";
-import { useRoute } from "vue-router";
+// import { ref, watch } from "vue";
+// import { useRoute } from "vue-router";
 
-const route = useRoute();
+// const route = useRoute();
 
 const props = defineProps(["menu"]);
 const emit = defineEmits(["toggleNav"]);

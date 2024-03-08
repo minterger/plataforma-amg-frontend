@@ -6,16 +6,24 @@ const routes = [
     path: "/",
     name: "Home",
     component: () => import("../views/Home.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/Login.vue"),
   },
   {
     path: "/viajes",
     name: "Viajes",
     component: () => import("../views/Viajes.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/viajes/:id",
     name: "Viaje",
     component: () => import("../views/ViajeId.vue"),
+    meta: { requiresAuth: true },
   },
 ];
 
@@ -43,11 +51,11 @@ router.beforeEach((to, from, next) => {
     to.matched.some((record) => record.meta.requiresAuth && !user.userToken)
   ) {
     next({
-      path: "/",
+      path: "/login",
     });
-  } else if (token && (to.name === "login" || to.name === "register")) {
+  } else if (user.userToken && to.name === "Login") {
     next({
-      path: "/dashboard",
+      path: "/",
     });
   } else {
     next();
