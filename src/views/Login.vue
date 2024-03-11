@@ -23,22 +23,10 @@ const user = userStore();
       >
         Iniciar Sesion
       </h1>
-
-      <!-- <form
-        class="w-full flex flex-col gap-4"
-        @submit.prevent="user.login(userData.email, userData.password)"
-      > -->
       <form
         class="w-full flex flex-col gap-4"
         @submit.prevent="user.login(userData.email, userData.password)"
       >
-        <Transition>
-          <span
-            class="fixed bg-red-600 p-4 rounded-lg top-5 right-5"
-            v-show="user.isMessage"
-            >{{ user.message }}</span
-          >
-        </Transition>
         <div>
           <label for="email">Email</label>
           <input
@@ -73,15 +61,3 @@ const user = userStore();
     </div>
   </div>
 </template>
-
-<style scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>

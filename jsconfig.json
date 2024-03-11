@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "CommonJS",
+    "lib": [
+      "dom",
+      "es5",
+      "es6",
+      "es2017",
+      "es2018",
+      "es2019",
+      "es2020",
+      "es2021",
+      "esnext"
+    ],
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "baseUrl": "@"
+  },
+  "include": ["src/**/*"]
+}

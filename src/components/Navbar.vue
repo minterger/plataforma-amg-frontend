@@ -17,8 +17,12 @@ const emit = defineEmits(["toggleNav"]);
 
 <template>
   <div
-    :class="menu ? 'translate-x-0' : '-translate-x-full lg:w-[4.5rem]'"
-    class="fixed z-50 lg:static bg-gray-900 h-screen w-4/5 sm:w-80 lg:w-1/5 2xl:w-96 p-4 lg:translate-x-0 transition-transform lg:transition-all ease-in-out"
+    :class="
+      menu
+        ? 'translate-x-0 '
+        : '-translate-x-full lg:w-[4.5rem] lg:min-w-[4.5rem]'
+    "
+    class="fixed z-50 lg:static bg-gray-900 h-screen w-4/5 sm:w-72 2xl:w-72 sm:min-w-72 p-4 lg:translate-x-0 transition-transform lg:transition-all ease-in-out"
   >
     <button
       @click="emit('toggleNav', !menu)"

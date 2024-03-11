@@ -20,9 +20,15 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/viajes/:id",
+    path: "/viajes/select/:id",
     name: "Viaje",
     component: () => import("../views/ViajeId.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/viajes/new",
+    name: "ViajeNew",
+    component: () => import("../views/NewViaje.vue"),
     meta: { requiresAuth: true },
   },
 ];

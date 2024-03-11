@@ -1,26 +1,42 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onBeforeUnmount } from "vue";
 import { userStore } from "../stores/user.store";
+import { searchStore } from "../stores/search.store";
 
 const user = userStore();
+const search = searchStore();
 
 const menuUser = ref(false);
 </script>
 
 <template>
   <div
-    class="bg-white border-b shadow-sm w-full h-16 flex items-center gap-4 absolute px-8"
+    class="bg-white w-full border-b shadow-sm h-16 flex items-center gap-4 absolute z-10 px-8"
   >
     <div class="flex items-center gap-2 w-full">
-      <label for="search"
+      <label v-show="search.searchShow" for="search"
         ><i class="bx bx-search text-slate-400 text-2xl"></i
       ></label>
       <input
+        v-show="search.searchShow"
+        v-model="search.search"
         id="search"
-        class="w-full focus-visible:outline-none p-2"
+        class="focus-visible:outline-none p-2 w-full"
         type="text"
         placeholder="Buscar..."
       />
+
+      <div class="relative flex items-center gap-4" v-show="search.searchShow">
+        <i class="bx bx-list-plus text-slate-400 text-2xl"></i>
+        <input type="text" disabled value="Select" class="text-slate-600" />
+        <ul
+          class="absolute top-0 mt-9 p-4 flex flex-col gap-4 bg-white rounded-md border shadow-lg"
+        >
+          <li v-for="param of search.paramsToSeach">
+            <button>{{ param }}</button>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="relative">
       <button

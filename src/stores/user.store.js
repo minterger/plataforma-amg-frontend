@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
+import { notifyStore } from "./notify.store";
 
 export const userStore = defineStore("users", () => {
+  const notify = notifyStore();
   const router = useRouter();
   const userToken = ref("");
-  const message = ref("");
-  const isMessage = ref(false);
   const user = reactive({
     name: "",
     email: "",
@@ -36,13 +36,18 @@ export const userStore = defineStore("users", () => {
 
       const data = await res.json();
 
-      user.name = data.name;
-      user.email = data.email;
+      if (res.ok) {
+        user.name = data.name;
+        user.email = data.email;
+      } else {
+        cerrarSesion();
+
+        notify.pushNotifications({ message: data.message });
+      }
     } catch (error) {
+      notify.pushNotifications({ message: "internal server error" });
       if (error) {
-        userToken.value = "";
-        user.name = "";
-        user.email = "";
+        cerrarSesion();
       }
     }
   };
@@ -66,15 +71,18 @@ export const userStore = defineStore("users", () => {
       const data = await res.json();
 
       if (res.ok) {
-        console.log(data.token);
         userToken.value = data.token;
         setTokentLocalStorage();
+        notify.pushNotifications({
+          message: "Sesion iniciada correctamente",
+          type: "success",
+        });
         router.push("/");
       } else {
-        setMessage(data.message);
+        notify.pushNotifications({ message: data.message });
       }
     } catch (error) {
-      setMessage("internal server error");
+      notify.pushNotifications({ message: "internal server error" });
     }
   };
 
@@ -87,17 +95,7 @@ export const userStore = defineStore("users", () => {
     router.push("/login");
   };
 
-  const setMessage = (newMessage) => {
-    message.value = newMessage;
-    isMessage.value = true;
-    setTimeout(() => {
-      isMessage.value = false;
-    }, 3000);
-  };
-
   return {
-    message,
-    isMessage,
     userToken,
     user,
     getTokenLocalStorage,
@@ -105,6 +103,5 @@ export const userStore = defineStore("users", () => {
     getDataUserFromToken,
     login,
     cerrarSesion,
-    setMessage,
   };
 });
