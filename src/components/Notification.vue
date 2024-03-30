@@ -5,8 +5,6 @@ import { notifyStore } from "../stores/notify.store";
 const props = defineProps(["notification"]);
 const notify = notifyStore();
 
-console.log(props.notification);
-
 const time = setTimeout(() => {
   notify.removeNotification(props.notification?.id);
 }, 3000);
