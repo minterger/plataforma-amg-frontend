@@ -1,18 +1,13 @@
 <script setup>
-import { onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import { searchStore } from "../stores/search.store";
 
 const search = searchStore();
 
-search.paramsToSeach = ["Ejemplo", "Ejemplo", "Ejemplo", "Ejemplo", "Ejemplo"];
+search.paramsToSeach = ["CRT", "MIC", "Transporte", "Cliente", "Contrato"];
 
 search.searchShow = true;
-
-onBeforeUnmount(() => {
-  search.searchShow = false;
-  search.paramsToSeach = [];
-});
+search.paramsShow = true;
 
 const router = useRouter();
 

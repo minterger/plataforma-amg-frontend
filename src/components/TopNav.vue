@@ -26,14 +26,38 @@ const menuUser = ref(false);
         placeholder="Buscar..."
       />
 
-      <div class="relative flex items-center gap-4" v-show="search.searchShow">
-        <i class="bx bx-list-plus text-slate-400 text-2xl"></i>
-        <input type="text" disabled value="Select" class="text-slate-600" />
+      <div
+        class="relative flex items-center"
+        v-show="search.searchShow && search.paramsShow"
+      >
+        <div
+          class="flex items-center gap-2 cursor-pointer"
+          @click="
+            () => {
+              search.paramsToggleMenu = !search.paramsToggleMenu;
+            }
+          "
+        >
+          <i class="bx bx-list-plus text-slate-400 text-2xl"></i>
+          <span class="text-slate-600 md:min-w-20">{{
+            search.paramSelected || "Select"
+          }}</span>
+        </div>
         <ul
+          :class="
+            search.paramsToggleMenu
+              ? 'visible opacity-100'
+              : 'invisible opacity-0 -scale-50'
+          "
           class="absolute top-0 mt-9 p-4 flex flex-col gap-4 bg-white rounded-md border shadow-lg"
         >
-          <li v-for="param of search.paramsToSeach">
-            <button>{{ param }}</button>
+          <li v-for="param of search.paramsToSeach" class="w-full">
+            <button
+              class="w-full text-left"
+              @click="() => (search.paramSelected = param)"
+            >
+              {{ param }}
+            </button>
           </li>
         </ul>
       </div>
