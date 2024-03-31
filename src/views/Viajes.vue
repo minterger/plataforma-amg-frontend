@@ -40,7 +40,8 @@ const routerPush = (id) => {
         <thead>
           <tr class="font-semibold text-[0.95rem] text-slate-500">
             <th class="pb-3 text-start">N° Contrato</th>
-            <th class="pb-3 text-start">Fletero</th>
+            <th class="pb-3 text-start">Fecha Inicio</th>
+            <th class="pb-3 text-start">Transporte</th>
             <th class="pb-3 text-start">Chofer</th>
             <th class="pb-3 text-center">CRT : MIC</th>
             <th class="pb-3 text-center">Origen : Destino</th>
@@ -56,6 +57,9 @@ const routerPush = (id) => {
           >
             <td class="text-sm font-semibold py-5 pr-5 whitespace-nowrap">
               AMG-12312312
+            </td>
+            <td class="text-sm font-semibold py-5 pr-5 whitespace-nowrap">
+              12/10/2023
             </td>
             <td class="text-sm font-bold py-5 pr-5 whitespace-nowrap">
               Lucio Gonzalez

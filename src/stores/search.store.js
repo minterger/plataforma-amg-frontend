@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, watch } from "vue";
+import { ref, reactive, watch } from "vue";
 import { useRoute } from "vue-router";
 
 export const searchStore = defineStore("search", () => {
@@ -12,7 +12,7 @@ export const searchStore = defineStore("search", () => {
       paramsShow.value = false;
       paramsToggleMenu.value = false;
       paramSelected.value = "";
-      search.value = "";
+      searchText.value = "";
       paramsToSeach.value = [];
     }
   );
@@ -21,15 +21,20 @@ export const searchStore = defineStore("search", () => {
   const paramsShow = ref(false);
   const paramsToggleMenu = ref(false);
   const paramSelected = ref("");
-  const search = ref("");
+  const searchText = ref("");
   const paramsToSeach = ref([]);
+
+  const search = () => {};
 
   return {
     searchShow,
     paramsShow,
     paramsToggleMenu,
     paramSelected,
-    search,
+    searchText,
     paramsToSeach,
+
+    // methods
+    search,
   };
 });

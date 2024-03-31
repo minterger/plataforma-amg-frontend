@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onBeforeUnmount } from "vue";
+import { ref } from "vue";
 import { userStore } from "../stores/user.store";
 import { searchStore } from "../stores/search.store";
 
@@ -13,18 +13,23 @@ const menuUser = ref(false);
   <div
     class="bg-white w-full border-b shadow-sm h-16 flex items-center gap-4 absolute z-10 px-8"
   >
-    <div class="flex items-center gap-2 w-full">
-      <label v-show="search.searchShow" for="search"
-        ><i class="bx bx-search text-slate-400 text-2xl"></i
-      ></label>
-      <input
-        v-show="search.searchShow"
-        v-model="search.search"
-        id="search"
-        class="focus-visible:outline-none p-2 w-full"
-        type="text"
-        placeholder="Buscar..."
-      />
+    <div class="flex items-center w-full">
+      <form
+        @submit.prevent="search.search"
+        class="flex items-center gap-2 w-full"
+      >
+        <label v-show="search.searchShow" for="search"
+          ><i class="bx bx-search text-slate-400 text-2xl"></i
+        ></label>
+        <input
+          v-show="search.searchShow"
+          v-model="search.searchText"
+          id="search"
+          class="focus-visible:outline-none p-2 w-full"
+          type="text"
+          placeholder="Buscar..."
+        />
+      </form>
 
       <div
         class="relative flex items-center"
@@ -49,7 +54,7 @@ const menuUser = ref(false);
               ? 'visible opacity-100'
               : 'invisible opacity-0 -scale-50'
           "
-          class="absolute top-0 mt-9 p-4 flex flex-col gap-4 bg-white rounded-md border shadow-lg"
+          class="absolute top-0 mt-9 p-4 flex flex-col gap-4 bg-white rounded-md border shadow-lg transition-all"
         >
           <li v-for="param of search.paramsToSeach" class="w-full">
             <button
