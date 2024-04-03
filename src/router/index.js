@@ -5,13 +5,25 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/Home.vue"),
+    component: () => import("../views/Building.vue"),
     meta: { requiresAuth: true },
   },
   {
     path: "/login",
     name: "Login",
     component: () => import("../views/Login.vue"),
+  },
+  {
+    path: "/transportes",
+    name: "Transportes",
+    component: () => import("../views/Building.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/clientes",
+    name: "Clientes",
+    component: () => import("../views/Building.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/viajes",

@@ -7,6 +7,7 @@ const user = userStore();
 const search = searchStore();
 
 const menuUser = ref(false);
+const paramsToggleMenu = ref(false);
 </script>
 
 <template>
@@ -39,18 +40,22 @@ const menuUser = ref(false);
           class="flex items-center gap-2 cursor-pointer"
           @click="
             () => {
-              search.paramsToggleMenu = !search.paramsToggleMenu;
+              paramsToggleMenu = !paramsToggleMenu;
             }
           "
         >
           <i class="bx bx-list-plus text-slate-400 text-2xl"></i>
-          <span class="text-slate-600 md:min-w-20">{{
-            search.paramSelected || "Select"
-          }}</span>
+          <span
+            :class="[
+              search.paramSelected ? 'text-slate-800' : 'text-slate-500',
+            ]"
+            class="md:min-w-20 font-semibold"
+            >{{ search.paramSelected || "Filtro" }}</span
+          >
         </div>
         <ul
           :class="
-            search.paramsToggleMenu
+            paramsToggleMenu
               ? 'visible opacity-100'
               : 'invisible opacity-0 -scale-50'
           "

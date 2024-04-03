@@ -66,37 +66,19 @@ const emit = defineEmits(["toggleNav"]);
       <li>
         <router-link
           class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors overflow-hidden"
-          to="/jkhdiasbdiuasbdi"
+          to="/transportes"
           active-class="bg-gray-800 text-white"
           ><i class="bx bx-hard-hat text-2xl font-light"></i
-          >Fleteros</router-link
+          >Transportes</router-link
         >
       </li>
       <li>
         <router-link
           class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors overflow-hidden"
-          to="/asdadasd"
+          to="/clientes"
           active-class="bg-gray-800 text-white"
           ><i class="bx bx-transfer text-2xl font-light"></i
-          >Transportes</router-link
-        >
-      </li>
-      <li>
-        <router-link
-          class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors overflow-hidden"
-          to="/asdasda"
-          active-class="bg-gray-800 text-white"
-          ><i class="bx bx-hard-hat text-2xl font-light"></i
-          >Transportes</router-link
-        >
-      </li>
-      <li>
-        <router-link
-          class="px-2 py-1 flex gap-3 items-center rounded-md hover:bg-gray-800 hover:text-white transition-colors overflow-hidden"
-          to="/asd"
-          active-class="bg-gray-800 text-white"
-          ><i class="bx bx-hard-hat text-2xl font-light"></i
-          >Transportes</router-link
+          >Clientes</router-link
         >
       </li>
     </ul>

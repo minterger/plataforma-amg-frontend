@@ -8,6 +8,7 @@ search.paramsToSeach = ["CRT", "MIC", "Transporte", "Cliente", "Contrato"];
 
 search.searchShow = true;
 search.paramsShow = true;
+search.searchIn = "viajes";
 
 const router = useRouter();
 
@@ -59,7 +60,11 @@ const routerPush = (id) => {
               AMG-12312312
             </td>
             <td class="text-sm font-semibold py-5 pr-5 whitespace-nowrap">
-              12/10/2023
+              <span
+                class="text-sm text-cyan-500 bg-cyan-100 rounded-md px-3 py-1 font-semibold whitespace-nowrap"
+              >
+                12/10/2023
+              </span>
             </td>
             <td class="text-sm font-bold py-5 pr-5 whitespace-nowrap">
               Lucio Gonzalez
