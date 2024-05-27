@@ -20,10 +20,20 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/new/transporte",
+    name: "NewTransporte",
+    component: () => import("../views/NewTransporte.vue"),
+  },
+  {
     path: "/clientes",
     name: "Clientes",
     component: () => import("../views/Building.vue"),
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/new/cliente",
+    name: "NewCliente",
+    component: () => import("../views/NewCliente.vue"),
   },
   {
     path: "/viajes",
