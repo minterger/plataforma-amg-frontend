@@ -1,12 +1,18 @@
 <script setup>
-import { defineProps } from "vue";
-const props = defineProps(["datosDe"]);
+import { defineProps, reactive } from "vue";
+const props = defineProps(["datos_de"]);
+
+const datos = reactive({
+  empresa: "",
+  id_tributaria: "",
+});
 </script>
 
 <template>
   <div>
     <div class="w-full flex gap-2 justify-end mb-6">
       <button
+        @click="$emit('save', datos.empresa, datos.id_tributaria)"
         class="flex items-center bg-green-700 text-white gap-2 px-4 py-2 rounded-md"
       >
         <i class="bx bx-save"></i> Guardar
@@ -16,7 +22,7 @@ const props = defineProps(["datosDe"]);
       class="border border-dashed p-4 rounded-lg shadow-md bg-white overflow-x-auto w-full"
     >
       <h2 class="text-center font-semibold text-2xl pt-4 pb-2">
-        Datos del {{ datosDe }}
+        Datos del {{ datos_de }}
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 border-b pb-4">
         <div class="flex flex-col">
@@ -28,6 +34,7 @@ const props = defineProps(["datosDe"]);
           <input
             class="p-2 border rounded-md"
             type="text"
+            v-model="datos.empresa"
             id="name"
             placeholder="Perez e Hijos S.A."
           />
@@ -41,6 +48,7 @@ const props = defineProps(["datosDe"]);
           ><input
             class="p-2 border rounded-md"
             type="text"
+            v-model="datos.id_tributaria"
             id="id_tributaria"
             placeholder="CUIT, CUIL, RUT o segun corresponda"
           />
