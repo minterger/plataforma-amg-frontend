@@ -1,10 +1,36 @@
 <script setup>
-import { defineProps, reactive } from "vue";
-const props = defineProps(["datos_de"]);
+import { defineProps, ref, watch } from "vue";
+const props = defineProps({
+  datos_de: {
+    type: String,
+    required: true,
+  },
+});
 
-const datos = reactive({
-  empresa: "",
-  id_tributaria: "",
+const empresa = ref("");
+const id_tributaria = ref("");
+
+function formatString(value) {
+  return value.replace(/(\d{2})(\d{8})?(\d)?/, (match, $1, $2, $3) => {
+    let formatted = $1;
+    if ($2) formatted += `-${$2}`;
+    if ($3) formatted += `-${$3}`;
+    return formatted;
+  });
+}
+
+watch(id_tributaria, (newValue, oldValue) => {
+  if (newValue !== oldValue) {
+    if (newValue.length >= 14 || /[A-z]/.test(newValue)) {
+      id_tributaria.value = oldValue;
+      return;
+    }
+    const unformattedValue = newValue.replace(/-/g, "");
+    const formattedValue = formatString(unformattedValue);
+    if (formattedValue !== id_tributaria.value) {
+      id_tributaria.value = formattedValue;
+    }
+  }
 });
 </script>
 
@@ -12,7 +38,7 @@ const datos = reactive({
   <div>
     <div class="w-full flex gap-2 justify-end mb-6">
       <button
-        @click="$emit('save', datos.empresa, datos.id_tributaria)"
+        @click="$emit('save', empresa, id_tributaria)"
         class="flex items-center bg-green-700 text-white gap-2 px-4 py-2 rounded-md"
       >
         <i class="bx bx-save"></i> Guardar
@@ -34,7 +60,7 @@ const datos = reactive({
           <input
             class="p-2 border rounded-md"
             type="text"
-            v-model="datos.empresa"
+            v-model="empresa"
             id="name"
             placeholder="Perez e Hijos S.A."
           />
@@ -48,7 +74,7 @@ const datos = reactive({
           ><input
             class="p-2 border rounded-md"
             type="text"
-            v-model="datos.id_tributaria"
+            v-model="id_tributaria"
             id="id_tributaria"
             placeholder="CUIT, CUIL, RUT o segun corresponda"
           />
