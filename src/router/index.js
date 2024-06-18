@@ -16,7 +16,7 @@ const routes = [
   {
     path: "/transportes",
     name: "Transportes",
-    component: () => import("../views/Building.vue"),
+    component: () => import("../views/Transportes.vue"),
     meta: { requiresAuth: true },
   },
   {
