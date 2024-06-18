@@ -19,6 +19,7 @@ const routerPush = (id) => {
 
 <template>
   <div>
+    <!-- botones de añadir y actualizar -->
     <div class="w-full flex gap-2 justify-end mb-6">
       <router-link
         to="/viajes/new"
@@ -32,6 +33,8 @@ const routerPush = (id) => {
         <i class="bx bx-loader-alt"></i> Actualizar
       </button>
     </div>
+
+    <!-- tabla de contenidos -->
     <div
       class="border border-dashed p-4 rounded-lg shadow-md bg-white overflow-x-auto w-full"
     >
