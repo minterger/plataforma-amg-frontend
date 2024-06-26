@@ -59,12 +59,15 @@ const paramsToggleMenu = ref(false);
               ? 'visible opacity-100'
               : 'invisible opacity-0 -scale-50'
           "
-          class="absolute top-0 mt-9 p-4 flex flex-col gap-4 bg-white rounded-md border shadow-lg transition-all"
+          class="absolute top-0 mt-9 flex flex-col bg-white rounded-md border shadow-lg transition-all"
         >
           <li v-for="param of search.paramsToSeach" class="w-full">
             <button
-              class="w-full text-left"
-              @click="() => (search.paramSelected = param)"
+              class="w-full text-left hover:bg-gray-100 px-4 py-2 rounded-md transition-colors"
+              @click="
+                () =>
+                  (search.paramSelected = param) && (paramsToggleMenu = false)
+              "
             >
               {{ param }}
             </button>
@@ -88,13 +91,20 @@ const paramsToggleMenu = ref(false);
         :class="
           menuUser ? 'visible opacity-100' : 'invisible opacity-0 -scale-50'
         "
-        class="absolute right-0 rounded-md bg-white shadow-lg mt-2 w-32 flex flex-col py-1 border transition-all"
+        class="absolute right-0 rounded-md bg-white shadow-lg mt-2 w-32 flex flex-col border transition-all"
       >
         <li class="flex">
-          <router-link class="w-full px-2 py-1" to="/">Tus Datos</router-link>
+          <router-link
+            class="w-full hover:bg-gray-100 px-4 py-2 rounded-md transition-colors"
+            to="/"
+            >Tus Datos</router-link
+          >
         </li>
         <li class="flex">
-          <button class="w-full text-left px-2 py-1" @click="user.cerrarSesion">
+          <button
+            class="w-full text-left hover:bg-gray-100 px-4 py-2 rounded-md transition-colors"
+            @click="user.cerrarSesion"
+          >
             Salir
           </button>
         </li>
