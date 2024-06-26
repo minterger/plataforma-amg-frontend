@@ -1,7 +1,9 @@
 <script setup>
 import { empresaStore } from "../stores/empresa.store";
+import { searchStore } from "../stores/search.store";
 
 const empresa = empresaStore();
+const search = searchStore();
 
 const actualizar = () => {
   empresa.isLoadingEmpresas = true;
@@ -9,6 +11,11 @@ const actualizar = () => {
 };
 
 actualizar();
+
+search.paramsToSeach = ["Empresa", "ID Tributaria"];
+search.searchShow = true;
+search.paramsShow = true;
+search.searchIn = "empresa";
 </script>
 
 <template>
