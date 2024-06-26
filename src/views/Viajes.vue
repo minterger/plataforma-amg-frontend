@@ -12,6 +12,7 @@ search.searchIn = "viajes";
 
 const router = useRouter();
 
+//TODO: This function is used to navigate to the selected trip
 const routerPush = (id) => {
   router.push("/viajes/select/" + id);
 };
@@ -34,7 +35,7 @@ const routerPush = (id) => {
       </button>
     </div>
 
-    <!-- tabla de contenidos -->
+    <!-- TODO: tabla de contenidos -->
     <div
       class="border border-dashed p-4 rounded-lg shadow-md bg-white overflow-x-auto w-full"
     >
