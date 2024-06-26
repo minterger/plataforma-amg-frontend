@@ -63,7 +63,7 @@ const paramsToggleMenu = ref(false);
         >
           <li v-for="param of search.paramsToSeach" class="w-full">
             <button
-              class="w-full text-left hover:bg-gray-100 px-4 py-2 rounded-md transition-colors"
+              class="w-full text-left hover:bg-gray-100 px-4 py-2 rounded-md transition-colors whitespace-nowrap"
               @click="
                 () =>
                   (search.paramSelected = param) && (paramsToggleMenu = false)
