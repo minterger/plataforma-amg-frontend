@@ -5,7 +5,7 @@ const empresa = empresaStore();
 
 const actualizar = () => {
   empresa.isLoadingEmpresas = true;
-  empresa.getEmpresas({ type: "transporte" });
+  empresa.getEmpresas({ type: "cliente" });
 };
 
 actualizar();
@@ -16,11 +16,11 @@ actualizar();
     <!-- botones de añadir y actualizar -->
     <div class="w-full flex gap-2 justify-end mb-6">
       <router-link
-        to="/new/transporte"
+        to="/new/cliente"
         class="flex items-center bg-green-700 text-white gap-2 px-4 py-2 rounded-md"
       >
-        <i class="bx bx-plus"></i>Añadir
-      </router-link>
+        <i class="bx bx-plus"></i>Añadir</router-link
+      >
       <button
         class="flex items-center bg-gray-800 text-white gap-2 px-4 py-2 rounded-md"
         @click="actualizar"
@@ -34,16 +34,17 @@ actualizar();
       class="border border-dashed p-4 rounded-lg shadow-md bg-white overflow-x-auto w-full"
     >
       <table
-        class="my-0 align-middle text-dark border-neutral-200 border-collapse w-full"
+        class="my-0 align -middle text-dark border-neutral-200 border-collapse w-full"
       >
         <thead>
           <tr class="font-semibold text-[0.95rem] text-slate-500">
             <th class="pb-3 text-start">Razon Social</th>
             <th class="pb-3 text-start">ID Trubutaria</th>
-            <th class="pb-3 text-start">Unidades</th>
+            <th class="pb-3 text-start">Viajes</th>
           </tr>
         </thead>
-        <tbody v-if="empresa.isLoadingEmpresas" class="text-slate-800 w-full">
+
+        <tbody v-if="empresa.isLoadingEmpresas">
           <tr class="border-b border-dashed last:border-b-0">
             <td class="text-sm font-bold py-5 pr-5-whitespace-nowrap">
               Cargando...
@@ -62,13 +63,6 @@ actualizar();
                 <i class="bx bx-loader-alt bx-spin"></i>
               </span>
             </td>
-            <!-- <td class="py-5">
-              <a
-                class="bg-gray-200 flex justify-center items-center w-7 h-7 rounded-full"
-              >
-                <i class="bx bx-chevron-right text-lg text-slate-400"></i>
-              </a>
-            </td> -->
           </tr>
         </tbody>
         <tbody
@@ -86,9 +80,9 @@ actualizar();
         </tbody>
         <tbody v-else class="text-slate-800 w-full">
           <tr
-            class="border-b border-dashed last:border-b-0"
             v-for="emp in empresa.dataEmpresas?.docs"
             :key="emp._id"
+            class="border-b border-dashed last:border-b-0"
           >
             <td class="text-sm font-bold py-5 pr-5-whitespace-nowrap">
               {{ emp.empresa }}
@@ -104,13 +98,13 @@ actualizar();
               <span
                 class="text-sm text-blue-500 bg-blue-100 rounded-md px-3 py-1 font-semibold whitespace-nowrap"
               >
-                {{ emp.vehiculo.length }}
+                {{ emp.viajes.length }}
               </span>
             </td>
             <td class="py-5">
               <router-link
                 :to="{
-                  name: 'TransporteData',
+                  name: 'ClienteData',
                   params: { id_tributaria: emp._id },
                 }"
                 class="bg-gray-200 flex justify-center items-center w-7 h-7 rounded-full"

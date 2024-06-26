@@ -11,21 +11,38 @@ const empresa = ref("");
 const id_tributaria = ref("");
 
 function formatString(value) {
-  return value.replace(/(\d{2})(\d{8})?(\d)?/, (match, $1, $2, $3) => {
-    let formatted = $1;
-    if ($2) formatted += `-${$2}`;
-    if ($3) formatted += `-${$3}`;
-    return formatted;
-  });
+  //lenght pero tomando solo los numeros de value
+
+  if (value.length <= 9) {
+    return value.replace(
+      /(\d{2})(\d{3})(\d{3})(\d{1})?/,
+      (match, $1, $2, $3, $4) => {
+        let formatted = $1;
+        if ($2) formatted += `.${$2}`;
+        if ($3) formatted += `.${$3}`;
+        if ($4) formatted += `-${$4}`;
+        return formatted;
+      }
+    );
+  } else if (value.length > 9 && value.length <= 11) {
+    return value.replace(/(\d{2})(\d{8})?(\d{1})?/, (match, $1, $2, $3) => {
+      let formatted = $1;
+      if ($2) formatted += `-${$2}`;
+      if ($3) formatted += `-${$3}`;
+      return formatted;
+    });
+  } else {
+    return value;
+  }
 }
 
 watch(id_tributaria, (newValue, oldValue) => {
   if (newValue !== oldValue) {
-    if (newValue.length >= 14 || /[A-z]/.test(newValue)) {
+    if (newValue.length >= 20 || /[A-z]/.test(newValue)) {
       id_tributaria.value = oldValue;
       return;
     }
-    const unformattedValue = newValue.replace(/-/g, "");
+    const unformattedValue = newValue.replace(/\D/g, "");
     const formattedValue = formatString(unformattedValue);
     if (formattedValue !== id_tributaria.value) {
       id_tributaria.value = formattedValue;

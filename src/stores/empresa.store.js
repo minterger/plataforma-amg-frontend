@@ -1,10 +1,13 @@
 import { defineStore } from "pinia";
 import { notifyStore } from "./notify.store";
 import { userStore } from "./user.store";
+import { ref } from "vue";
 
 export const empresaStore = defineStore("empresa", () => {
   const notify = notifyStore();
   const user = userStore();
+  const isLoadingEmpresas = ref(false);
+  const dataEmpresas = ref();
 
   const newEmpresa = async ({ empresa, id_tributaria, type }) => {
     try {
@@ -27,16 +30,19 @@ export const empresaStore = defineStore("empresa", () => {
         type: res.status === 200 ? "success" : "danger",
         message: data.message,
       });
+
+      return res.status === 200;
     } catch (error) {
       console.error(error);
       notify.pushNotifications({
         type: "danger",
         message: "Internal Server Error: create Empresa",
       });
+      return false;
     }
   };
 
-  const getEmpresas = async ({ filter, search, type = "ambos" }) => {
+  const getEmpresas = async ({ filter, search, type }) => {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/empresas?type=${type}${
@@ -48,9 +54,8 @@ export const empresaStore = defineStore("empresa", () => {
           },
         }
       );
-      const data = await res.json();
-
-      return data;
+      isLoadingEmpresas.value = false;
+      dataEmpresas.value = await res.json();
     } catch (error) {
       console.error(error);
       notify.pushNotifications({
@@ -61,6 +66,11 @@ export const empresaStore = defineStore("empresa", () => {
   };
 
   return {
+    // stats
+    dataEmpresas,
+    isLoadingEmpresas,
+
+    //methods
     newEmpresa,
     getEmpresas,
   };

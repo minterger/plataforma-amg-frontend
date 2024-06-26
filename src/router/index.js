@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { userStore } from "../stores/user.store";
+import { comment } from "postcss";
 
 const routes = [
   {
@@ -20,20 +21,33 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/transporte/:id_tributaria",
+    name: "TransporteData",
+    component: () => import("../views/Building.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/new/transporte",
     name: "NewTransporte",
     component: () => import("../views/NewTransporte.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/clientes",
     name: "Clientes",
-    component: () => import("../views/Building.vue"),
+    component: () => import("../views/Clientes.vue"),
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/cliente/:id_tributaria",
+    name: "ClienteData",
+    component: () => import("../views/Building.vue"),
   },
   {
     path: "/new/cliente",
     name: "NewCliente",
     component: () => import("../views/NewCliente.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/viajes",
