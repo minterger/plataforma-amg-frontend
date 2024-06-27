@@ -49,7 +49,7 @@ const paramsToggleMenu = ref(false);
             :class="[
               search.paramSelected ? 'text-slate-800' : 'text-slate-500',
             ]"
-            class="md:min-w-20 font-semibold"
+            class="md:min-w-20 hidden sm:block font-semibold whitespace-nowrap"
             >{{ search.paramSelected || "Filtro" }}</span
           >
         </div>
@@ -91,7 +91,7 @@ const paramsToggleMenu = ref(false);
         :class="
           menuUser ? 'visible opacity-100' : 'invisible opacity-0 -scale-50'
         "
-        class="absolute right-0 rounded-md bg-white shadow-lg mt-2 w-32 flex flex-col border transition-all"
+        class="absolute right-0 top-0 mt-9 rounded-md bg-white shadow-lg w-32 flex flex-col border transition-all"
       >
         <li class="flex">
           <router-link
