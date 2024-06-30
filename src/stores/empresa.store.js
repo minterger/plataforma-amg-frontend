@@ -56,6 +56,7 @@ export const empresaStore = defineStore("empresa", () => {
       );
       isLoadingEmpresas.value = false;
       dataEmpresas.value = await res.json();
+      return dataEmpresas.value;
     } catch (error) {
       console.error(error);
       notify.pushNotifications({

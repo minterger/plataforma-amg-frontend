@@ -1,11 +1,39 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
+import Select from "../components/Select.vue";
+import { empresaStore } from "../stores/empresa.store";
+
+const empresa = empresaStore();
 
 const manifiesto = reactive({
   mic: "",
   crt: "",
-  cliente: "",
 });
+
+const cliente = reactive({
+  _id: "",
+  empresa: "",
+  id_tributaria: "",
+});
+
+const dataCliente = ref({});
+
+const searchCliente = async (value) => {
+  empresa.isLoadingEmpresas = true;
+  dataCliente.value = await empresa.getEmpresas({
+    type: "cliente",
+    filter: "empresa",
+    search: value,
+  });
+};
+
+const selectClient = (client) => {
+  cliente._id = client._id;
+  cliente.empresa = client.empresa;
+  cliente.id_tributaria = client.id_tributaria;
+};
+
+const remito = ref("");
 
 const viaje = reactive({
   origen: "",
@@ -14,11 +42,45 @@ const viaje = reactive({
 });
 
 const contratacion = reactive({
-  valor_flete: undefined,
+  valor_flete: 0,
   tipo_moneda: "",
   razon_social_facturacion: "",
   condicion_pago: "",
 });
+
+// evitar que valor_flete no sea negativo
+watch(
+  () => contratacion.valor_flete,
+  (newValue, oldValue) => {
+    if (newValue < 0) {
+      contratacion.valor_flete = oldValue;
+    }
+  }
+);
+
+// mismo que cliente pero con transporte
+const transporte = reactive({
+  _id: "",
+  empresa: "",
+  id_tributaria: "",
+});
+
+const dataTransporte = ref({});
+
+const searchTransporte = async (value) => {
+  empresa.isLoadingEmpresas = true;
+  dataTransporte.value = await empresa.getEmpresas({
+    type: "transporte",
+    filter: "empresa",
+    search: value,
+  });
+};
+
+const selectTransporte = (client) => {
+  transporte._id = client._id;
+  transporte.empresa = client.empresa;
+  transporte.id_tributaria = client.id_tributaria;
+};
 
 const descripcion = ref("");
 </script>
@@ -65,18 +127,40 @@ const descripcion = ref("");
               placeholder="EJ: 0003.AR.00213 (opcional)"
             />
           </div>
-          <div class="flex flex-col md:col-span-2">
-            <label
+
+          <div class="flex flex-col">
+            <label class="mb-2" for="crt">Remito</label>
+            <input
+              v-model="remito"
+              class="p-2 border rounded-md"
+              type="text"
+              id="remito"
+              placeholder="EJ: 0-00001234 (opcional)"
+            />
+          </div>
+
+          <div class="flex flex-col">
+            <!-- <label
               class="mb-2 after:content-['*'] after:ml-0.5 after:text-red-500"
               for="client"
               >Cliente</label
-            >
-            <input
+            > -->
+            <!-- <input
               v-model="manifiesto.cliente"
               class="p-2 border rounded-md"
               type="text"
               id="client"
               placeholder="EJ: SOC INVERSIONES"
+            /> -->
+            <Select
+              input-label="Cliente"
+              :required="true"
+              :selected="cliente.empresa"
+              :secundary-selected="cliente.id_tributaria"
+              :results="dataCliente.docs"
+              :loading="empresa.isLoadingEmpresas"
+              @search="searchCliente"
+              @select="selectClient"
             />
           </div>
         </div>
@@ -206,7 +290,7 @@ const descripcion = ref("");
           Empresa Contratada
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2 border-b pb-4">
-          <div class="flex flex-col">
+          <!-- <div class="flex flex-col">
             <label
               class="mb-2 after:content-['*'] after:ml-0.5 after:text-red-500"
               for="razon_contratada"
@@ -218,9 +302,20 @@ const descripcion = ref("");
               id="razon_contratada"
               placeholder="EJ: Juan Fredes S.A."
             />
-          </div>
+          </div> -->
 
-          <div class="flex flex-col">
+          <Select
+            input-label="Empresa Contratada"
+            :required="true"
+            :selected="transporte.empresa"
+            :secundary-selected="transporte.id_tributaria"
+            :results="dataTransporte?.docs"
+            :loading="empresa.isLoadingEmpresas"
+            @search="searchTransporte"
+            @select="selectTransporte"
+          />
+
+          <!-- <div class="flex flex-col">
             <label
               class="mb-2 after:content-['*'] after:ml-0.5 after:text-red-500"
               for="cuit_rut_contratada"
@@ -232,7 +327,7 @@ const descripcion = ref("");
               id="cuit_rut_contratada"
               placeholder="EJ: 30-74835868-4"
             />
-          </div>
+          </div> -->
 
           <div class="flex flex-col">
             <label
