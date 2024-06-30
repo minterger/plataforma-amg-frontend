@@ -23,7 +23,7 @@ const routes = [
   {
     path: "/transporte/:id_tributaria",
     name: "TransporteData",
-    component: () => import("../views/Building.vue"),
+    component: () => import("../views/TransporteData.vue"),
     meta: { requiresAuth: true },
   },
   {
