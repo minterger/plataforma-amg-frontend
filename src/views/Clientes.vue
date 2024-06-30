@@ -32,7 +32,11 @@ search.searchIn = "empresa";
         class="flex items-center bg-gray-800 text-white gap-2 px-4 py-2 rounded-md"
         @click="actualizar"
       >
-        <i class="bx bx-loader-alt"></i>Actualizar
+        <i
+          class="bx bx-loader-alt"
+          :class="{ 'bx-spin': empresa.isLoadingEmpresas }"
+        ></i
+        >Actualizar
       </button>
     </div>
 
