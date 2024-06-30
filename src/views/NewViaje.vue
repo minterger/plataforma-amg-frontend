@@ -290,71 +290,25 @@ const descripcion = ref("");
           Empresa Contratada
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2 border-b pb-4">
-          <!-- <div class="flex flex-col">
-            <label
-              class="mb-2 after:content-['*'] after:ml-0.5 after:text-red-500"
-              for="razon_contratada"
-              >Razon Social</label
-            >
-            <input
-              class="p-2 border rounded-md"
-              type="text"
-              id="razon_contratada"
-              placeholder="EJ: Juan Fredes S.A."
-            />
-          </div> -->
-
-          <Select
-            input-label="Empresa Contratada"
-            :required="true"
-            :selected="transporte.empresa"
-            :secundary-selected="transporte.id_tributaria"
-            :results="dataTransporte?.docs"
-            :loading="empresa.isLoadingEmpresas"
-            @search="searchTransporte"
-            @select="selectTransporte"
-          />
-
-          <!-- <div class="flex flex-col">
-            <label
-              class="mb-2 after:content-['*'] after:ml-0.5 after:text-red-500"
-              for="cuit_rut_contratada"
-              >CUIT/RUT</label
-            >
-            <input
-              class="p-2 border rounded-md"
-              type="text"
-              id="cuit_rut_contratada"
-              placeholder="EJ: 30-74835868-4"
-            />
-          </div> -->
-
           <div class="flex flex-col">
-            <label
-              class="mb-2 after:content-['*'] after:ml-0.5 after:text-red-500"
-              for="tractor_contratada"
-              >Patente Tractor</label
-            >
-            <input
-              class="p-2 border rounded-md"
-              type="text"
-              id="tractor_contratada"
-              placeholder="EJ: AA 111 AA"
+            <Select
+              input-label="Empresa Contratada"
+              :required="true"
+              :selected="transporte.empresa"
+              :secundary-selected="transporte.id_tributaria"
+              :results="dataTransporte?.docs"
+              :loading="empresa.isLoadingEmpresas"
+              @search="searchTransporte"
+              @select="selectTransporte"
             />
           </div>
 
-          <div class="flex flex-col">
-            <label
-              class="mb-2 after:content-['*'] after:ml-0.5 after:text-red-500"
-              for="semirremolque_contratada"
-              >Patente Semi</label
-            >
-            <input
-              class="p-2 border rounded-md"
-              type="text"
-              id="semirremolque_contratada"
-              placeholder="EJ: AA 111 AA"
-            />
+          <div class="flex flex-col" v-show="transporte._id">
+            <Select input-label="Patente Tractor" :required="true" />
+          </div>
+
+          <div class="flex flex-col" v-show="transporte._id">
+            <Select input-label="Patente Semi" :required="true" />
           </div>
         </div>
 
