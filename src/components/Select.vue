@@ -88,7 +88,7 @@ const emitSelectResult = (result) => {
 
       <div
         v-show="results.length > 0 && valueInput !== ''"
-        class="absolute top-12 w-full bg-white border rounded-md shadow-lg max-h-56 overflow-auto"
+        class="absolute top-12 w-full bg-white border rounded-md shadow-lg max-h-56 overflow-auto z-10"
       >
         <div
           v-if="loading"
