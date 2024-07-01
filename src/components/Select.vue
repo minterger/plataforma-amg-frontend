@@ -18,6 +18,16 @@ const props = defineProps({
     required: true,
     default: () => [],
   },
+  paramToShow: {
+    type: String,
+    required: true,
+    default: "",
+  },
+  paramToShowSecundary: {
+    type: String,
+    required: false,
+    default: "",
+  },
   // objecto seleccionado
   selected: {
     type: String,
@@ -105,7 +115,10 @@ const emitSelectResult = (result) => {
             @click="emitSelectResult(result)"
             class="p-2 cursor-pointer hover:bg-gray-100"
           >
-            {{ result.empresa }}
+            <span class="font-semibold">{{ result[paramToShow] }}</span>
+            <template v-if="paramToShowSecundary !== ''">
+              - {{ result[paramToShowSecundary] }}
+            </template>
           </li>
         </ul>
       </div>

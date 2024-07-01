@@ -129,7 +129,7 @@ const descripcion = ref("");
           </div>
 
           <div class="flex flex-col">
-            <label class="mb-2" for="crt">Remito</label>
+            <label class="mb-2" for="remito">Remito</label>
             <input
               v-model="remito"
               class="p-2 border rounded-md"
@@ -157,6 +157,8 @@ const descripcion = ref("");
               :required="true"
               :selected="cliente.empresa"
               :secundary-selected="cliente.id_tributaria"
+              param-to-show="empresa"
+              param-to-show-secundary="id_tributaria"
               :results="dataCliente.docs"
               :loading="empresa.isLoadingEmpresas"
               @search="searchCliente"
@@ -296,6 +298,8 @@ const descripcion = ref("");
               :required="true"
               :selected="transporte.empresa"
               :secundary-selected="transporte.id_tributaria"
+              param-to-show="empresa"
+              param-to-show-secundary="id_tributaria"
               :results="dataTransporte?.docs"
               :loading="empresa.isLoadingEmpresas"
               @search="searchTransporte"
