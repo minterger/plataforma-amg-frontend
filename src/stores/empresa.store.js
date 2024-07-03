@@ -66,6 +66,57 @@ export const empresaStore = defineStore("empresa", () => {
     }
   };
 
+  const getOneEmpresa = async ({ id, type }) => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/empresas/${id}/${type}`,
+        {
+          headers: {
+            authorization: user.userToken,
+          },
+        }
+      );
+      return await res.json();
+    } catch (error) {
+      console.error(error);
+      notify.pushNotifications({
+        type: "danger",
+        message: "Internal Server Error: get Empresa",
+      });
+    }
+  };
+
+  const deleteEmpresa = async ({ id, type }) => {
+    try {
+      const confirm = window.confirm("¿Estás seguro de eliminar esta empresa?");
+
+      if (!confirm) return false;
+
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/empresas/${id}/${type}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: user.userToken,
+          },
+        }
+      );
+      const data = await res.json();
+      notify.pushNotifications({
+        type: res.status === 200 ? "success" : "danger",
+        message: data.message,
+      });
+      return res.status === 200;
+    } catch (error) {
+      console.error(error);
+      notify.pushNotifications({
+        type: "danger",
+        message: "Internal Server Error: delete Empresa",
+      });
+      return false;
+    }
+  };
+
   return {
     // stats
     dataEmpresas,
@@ -74,5 +125,7 @@ export const empresaStore = defineStore("empresa", () => {
     //methods
     newEmpresa,
     getEmpresas,
+    getOneEmpresa,
+    deleteEmpresa,
   };
 });
