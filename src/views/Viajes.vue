@@ -36,7 +36,7 @@ const routerPush = (id) => {
     </div>
 
     <!-- TODO: tabla de contenidos -->
-    <div
+    <section
       class="border border-dashed p-4 rounded-lg shadow-md bg-white overflow-x-auto w-full"
     >
       <table
@@ -110,7 +110,7 @@ const routerPush = (id) => {
           </tr>
         </tbody>
       </table>
-    </div>
+    </section>
     <div class="flex items-center justify-center mt-6 text-white">
       <button class="p-2 border rounded-tl-md rounded-bl-md w-10 bg-slate-500">
         <i class="bx bx-chevron-left"></i>

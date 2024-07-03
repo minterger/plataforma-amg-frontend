@@ -41,7 +41,7 @@ search.searchIn = "empresa";
     </div>
 
     <!-- tabla de contenidos -->
-    <div
+    <section
       class="border border-dashed p-4 rounded-lg shadow-md bg-white overflow-x-auto w-full"
     >
       <table
@@ -115,14 +115,14 @@ search.searchIn = "empresa";
               <span
                 class="text-sm text-blue-500 bg-blue-100 rounded-md px-3 py-1 font-semibold whitespace-nowrap"
               >
-                {{ emp.vehiculo.length }}
+                {{ emp.vehiculos.length }}
               </span>
             </td>
             <td class="py-5">
               <router-link
                 :to="{
                   name: 'TransporteData',
-                  params: { id_tributaria: emp._id },
+                  params: { id: emp._id },
                 }"
                 class="bg-gray-200 flex justify-center items-center w-7 h-7 rounded-full"
               >
@@ -132,6 +132,6 @@ search.searchIn = "empresa";
           </tr>
         </tbody>
       </table>
-    </div>
+    </section>
   </div>
 </template>
