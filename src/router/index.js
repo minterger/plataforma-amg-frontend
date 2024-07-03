@@ -21,7 +21,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/transporte/:id_tributaria",
+    path: "/transporte/:id",
     name: "TransporteData",
     component: () => import("../views/TransporteData.vue"),
     meta: { requiresAuth: true },
@@ -39,9 +39,9 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/cliente/:id_tributaria",
+    path: "/cliente/:id",
     name: "ClienteData",
-    component: () => import("../views/Building.vue"),
+    component: () => import("../views/ClienteData.vue"),
   },
   {
     path: "/new/cliente",
