@@ -14,7 +14,6 @@ const transporte = ref(null);
 
 (async () => {
   transporte.value = await empresa.getOneEmpresa({ type: "transporte", id });
-  console.log(transporte.value);
 })();
 
 const deleteEmpresa = async () => {
