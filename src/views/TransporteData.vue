@@ -32,7 +32,7 @@ const deleteEmpresa = async () => {
       <!-- boton de añadir Unidades ya sea tractor o semi, boton para editar transporte y boton para eliminar transporte -->
       <div class="w-full flex gap-2 justify-end mb-6">
         <router-link
-          to="/new/transporte"
+          :to="'/new/unidad/' + transporte?._id"
           class="flex items-center bg-green-700 text-white gap-2 px-4 py-2 rounded-md"
         >
           <i class="bx bx-plus"></i>Añadir Unidad</router-link
