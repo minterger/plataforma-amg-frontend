@@ -42,12 +42,14 @@ export const empresaStore = defineStore("empresa", () => {
     }
   };
 
-  const getEmpresas = async ({ filter, search, type }) => {
+  const getEmpresas = async ({ filter, search, type, page = 1, limit }) => {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/empresas?type=${type}${
           filter ? `&filter=${filter}` : ""
-        }${search ? `&search=${search}` : ""}`,
+        }${search ? `&search=${search}` : ""}${page ? `&page=${page}` : ""}${
+          limit ? `&limit=${limit}` : ""
+        }`,
         {
           headers: {
             authorization: user.userToken,
@@ -56,6 +58,7 @@ export const empresaStore = defineStore("empresa", () => {
       );
       isLoadingEmpresas.value = false;
       dataEmpresas.value = await res.json();
+      console.log(dataEmpresas.value);
       return dataEmpresas.value;
     } catch (error) {
       console.error(error);
