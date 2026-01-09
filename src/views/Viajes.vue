@@ -111,16 +111,65 @@ const routerPush = (id) => {
         </tbody>
       </table>
     </section>
+
+    <!-- ejemplo paginacion -->
     <div class="flex items-center justify-center mt-6 text-white">
-      <button class="p-2 border rounded-tl-md rounded-bl-md w-10 bg-slate-500">
+      <!-- pagina anterior -->
+      <button
+        class="p-2 border rounded-tl-md rounded-bl-md w-10 bg-slate-500 hover:bg-slate-600 transition-colors"
+      >
         <i class="bx bx-chevron-left"></i>
       </button>
+
+      <!-- mas paginas antes -->
+      <button
+        class="p-2 border-t border-b bg-slate-500 w-10 text-center disabled cursor-not-allowed"
+        disabled=""
+      >
+        ...
+      </button>
+
+      <!-- dos paginas anteriores a la acutal -->
+      <button
+        class="p-2 border-t border-b bg-slate-500 w-10 text-center hover:bg-slate-600 cursor-pointer transition-colors"
+      >
+        3
+      </button>
+      <button
+        class="p-2 border-t border-b bg-slate-500 w-10 text-center hover:bg-slate-600 cursor-pointer transition-colors"
+      >
+        4
+      </button>
+      <!-- pagina actual -->
       <input
         @keypress.enter="console.log(5)"
-        class="p-2 border-t border-b text-center w-10 bg-slate-500"
+        class="p-2 border-t border-b text-center w-10 bg-slate-400 focus:bg-slate-600 text-slate-800 focus:text-white transition-colors z-10"
         value="5"
       />
-      <button class="p-2 border rounded-tr-md rounded-br-md w-10 bg-slate-500">
+
+      <!-- dos paginas despues de la actual -->
+      <button
+        class="p-2 border-t border-b bg-slate-500 w-10 text-center hover:bg-slate-600 cursor-pointer transition-colors"
+      >
+        6
+      </button>
+      <button
+        class="p-2 border-t border-b bg-slate-500 w-10 text-center hover:bg-slate-600 cursor-pointer transition-colors"
+      >
+        7
+      </button>
+      <!-- mas paginas despues en caso de que haya mas paginas -->
+      <button
+        class="p-2 border-t border-b bg-slate-500 w-10 text-center disabled cursor-not-allowed"
+        disabled=""
+      >
+        ...
+      </button>
+
+      <!-- pagina siguiente -->
+      <button
+        class="p-2 border rounded-tr-md rounded-br-md w-10 bg-slate-500 hover:bg-slate-600 transition-colors"
+      >
         <i class="bx bx-chevron-right"></i>
       </button>
     </div>
