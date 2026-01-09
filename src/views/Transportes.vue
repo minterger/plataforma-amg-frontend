@@ -180,7 +180,7 @@ search.searchIn = "empresa";
     <!-- paginación real -->
     <div
       class="flex items-center justify-center mt-6 text-white"
-      v-if="empresa.dataEmpresas"
+      v-if="empresa.dataEmpresas && empresa.dataEmpresas.totalPages > 1"
     >
       <!-- página anterior -->
       <button
