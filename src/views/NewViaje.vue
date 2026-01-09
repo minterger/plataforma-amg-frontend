@@ -10,6 +10,8 @@ const manifiesto = reactive({
   crt: "",
 });
 
+const remito = ref("");
+
 const cliente = reactive({
   _id: "",
   empresa: "",
@@ -32,8 +34,6 @@ const selectClient = (client) => {
   cliente.empresa = client.empresa;
   cliente.id_tributaria = client.id_tributaria;
 };
-
-const remito = ref("");
 
 const viaje = reactive({
   origen: "",
