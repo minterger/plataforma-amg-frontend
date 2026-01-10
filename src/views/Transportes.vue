@@ -199,7 +199,7 @@ search.searchIn = "empresa";
         class="p-2 border-t border-b text-center w-14 bg-slate-400 focus:bg-slate-600 text-white transition-colors z-10"
         aria-label="Página actual"
       />
-      <span class="text-white bg-slate-500 p-2"
+      <span class="text-white bg-slate-500 p-2 border-l"
         >de {{ empresa.dataEmpresas.totalPages }}</span
       >
 

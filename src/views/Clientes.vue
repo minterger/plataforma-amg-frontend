@@ -1,14 +1,56 @@
 <script setup>
+import { useRoute, useRouter } from "vue-router";
+import { watch } from "vue";
 import { empresaStore } from "../stores/empresa.store";
 import { searchStore } from "../stores/search.store";
 
 const empresa = empresaStore();
 const search = searchStore();
+const route = useRoute();
+const router = useRouter();
+
+// página actual proveniente de la query o por defecto 1
+const page = Number(route.query.page) || 1;
 
 const actualizar = () => {
   empresa.isLoadingEmpresas = true;
   empresa.getEmpresas({ type: "cliente" });
 };
+
+// navegación de paginación
+const goToPage = (p, updateRoute = true) => {
+  const total = empresa.dataEmpresas?.totalPages || 1;
+  const target = Math.max(1, Math.min(Number(p) || 1, total));
+  if (target === (empresa.dataEmpresas?.page || page.value)) return;
+  page.value = target;
+  if (updateRoute) {
+    router.replace({ name: "Transportes", query: { page: String(target) } });
+  }
+  actualizar();
+};
+
+const prev = () => {
+  if (empresa.dataEmpresas?.hasPrevPage) {
+    goToPage(empresa.dataEmpresas.prevPage);
+  }
+};
+
+const next = () => {
+  if (empresa.dataEmpresas?.hasNextPage) {
+    goToPage(empresa.dataEmpresas.nextPage);
+  }
+};
+
+// sincroniza cuando cambia la query del router
+watch(
+  () => route.query.page,
+  (val) => {
+    const p = Number(val) || 1;
+    if (p !== page.value) {
+      goToPage(p, false);
+    }
+  }
+);
 
 actualizar();
 
@@ -127,5 +169,41 @@ search.searchIn = "empresa";
         </tbody>
       </table>
     </section>
+    <!-- paginación real -->
+    <div
+      class="flex items-center justify-center mt-6 text-white"
+      v-if="empresa.dataEmpresas && empresa.dataEmpresas.totalPages > 1"
+    >
+      <!-- página anterior -->
+      <button
+        class="p-2 border rounded-tl-md rounded-bl-md w-10 bg-slate-500 hover:bg-slate-600 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        :disabled="!empresa.dataEmpresas.hasPrevPage"
+        @click="prev"
+        aria-label="Página anterior"
+      >
+        <i class="bx bx-chevron-left"></i>
+      </button>
+
+      <!-- input de página actual -->
+      <input
+        :value="empresa.dataEmpresas.page"
+        @keyup.enter="(e) => goToPage(e.target.value)"
+        class="p-2 border-t border-b text-center w-14 bg-slate-400 focus:bg-slate-600 text-white transition-colors z-10"
+        aria-label="Página actual"
+      />
+      <span class="text-white bg-slate-500 p-2 border-l"
+        >de {{ empresa.dataEmpresas.totalPages }}</span
+      >
+
+      <!-- página siguiente -->
+      <button
+        class="p-2 border rounded-tr-md rounded-br-md w-10 bg-slate-500 hover:bg-slate-600 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        :disabled="!empresa.dataEmpresas.hasNextPage"
+        @click="next"
+        aria-label="Página siguiente"
+      >
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
   </div>
 </template>
