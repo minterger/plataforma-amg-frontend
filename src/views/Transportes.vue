@@ -95,7 +95,7 @@ search.searchIn = "empresa";
           <tr class="font-semibold text-[0.95rem] text-slate-500">
             <th class="pb-3 text-start">Razon Social</th>
             <th class="pb-3 text-start">ID Trubutaria</th>
-            <th class="pb-3 text-start">Unidades</th>
+            <th class="pb-3 text-start">Viajes</th>
           </tr>
         </thead>
         <tbody v-if="empresa.isLoadingEmpresas" class="text-slate-800 w-full">
@@ -159,7 +159,7 @@ search.searchIn = "empresa";
               <span
                 class="text-sm text-blue-500 bg-blue-100 rounded-md px-3 py-1 font-semibold whitespace-nowrap"
               >
-                {{ emp.vehiculos?.length }}
+                {{ emp.viajes?.length }}
               </span>
             </td>
             <td class="py-5">
