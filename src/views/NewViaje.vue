@@ -46,6 +46,7 @@ const contratacion = reactive({
   tipo_moneda: "",
   razon_social_facturacion: "",
   condicion_pago: "",
+  dias_para_pago: 0,
 });
 
 // evitar que valor_flete no sea negativo
@@ -54,6 +55,16 @@ watch(
   (newValue, oldValue) => {
     if (newValue < 0) {
       contratacion.valor_flete = oldValue;
+    }
+  }
+);
+
+// evitar que dias_para_pago no sea negativo
+watch(
+  () => contratacion.dias_para_pago,
+  (newValue, oldValue) => {
+    if (newValue < 0) {
+      contratacion.dias_para_pago = oldValue;
     }
   }
 );
@@ -281,6 +292,22 @@ const descripcion = ref("");
               type="text"
               id="pago"
               placeholder="EJ: VTO DE PAGO A 30 DIAS"
+            />
+          </div>
+
+          <!-- dias para pago -->
+          <div class="flex flex-col">
+            <label
+              class="mb-2 after:content-['*'] after:ml-0.5 after:text-red-500"
+              for="days"
+              >Dias para pago</label
+            >
+            <input
+              v-model="contratacion.dias_para_pago"
+              class="p-2 border rounded-md"
+              type="number"
+              id="days"
+              placeholder="EJ: 30"
             />
           </div>
         </div>
